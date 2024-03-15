@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 
 export function SearchBar() {
@@ -18,31 +19,32 @@ export function SearchBar() {
     e.preventDefault();
     setSearchInput(e.target.value);
     const filtered = countries.filter((country) =>
-      country.name.includes(searchInput)
+      country.name.toLowerCase().includes(searchInput.toLowerCase())
     );
     setFilteredCountries(filtered);
   };
 
   return (
-    <div>
+    <main>
       <input
         type="text"
-        className="text-black"
+        className="text-black rounded-md p-1 m-2 w-60"
         onChange={handleChange}
         value={searchInput}
+        placeholder="Search for a country"
       />
-      <table>
+      <table className="text-black rounded-md p-1 bg-white m-2 w-60">
         <tr>
-          <th>Country</th>
+          <th className="p-1">
+            <p className="text-left">Result</p>
+          </th>
         </tr>
-        <div>
-          {filteredCountries.map((country, index) => (
-            <tr key={index}>
-              <td>{country.name}</td>
-            </tr>
-          ))}
-        </div>
+        {filteredCountries.map((country, index) => (
+          <tr key={index}>
+            <td>{country.name}</td>
+          </tr>
+        ))}
       </table>
-    </div>
+    </main>
   );
 }

@@ -1,9 +1,9 @@
+import React from "react";
+
 interface GridProps {
-  children?: any;
+  children?: React.ReactNode;
   className?: string;
   container?: boolean;
-
-  /****** Container Props ********/
   gridTemplateColumns?: string;
   gridTemplateRows?: string;
   gridColumnGap?: string;
@@ -37,14 +37,10 @@ interface GridProps {
     | "space-evenly"
     | "initial"
     | "inherit";
-
-  /****** Child Props ********/
   gridColumnStart?: string;
   gridColumnEnd?: string;
   gridRowStart?: string;
   gridRowEnd?: string;
-
-  /****** Common Layout Props ********/
   padding?: string;
   margin?: string;
   width?: string;
@@ -53,7 +49,7 @@ interface GridProps {
   maxHeight?: string;
 }
 
-export const Grid = ({
+export const Grid: React.FC<GridProps> = ({
   children,
   container,
   gridTemplateColumns,
@@ -75,13 +71,13 @@ export const Grid = ({
   maxWidth,
   maxHeight,
   className,
-}: GridProps) => {
+}) => {
   const gridClasses = [
     container && "grid",
     gridTemplateColumns && `grid-cols-${gridTemplateColumns}`,
     gridTemplateRows && `grid-rows-${gridTemplateRows}`,
-    gridColumnGap && `col-gap-${gridColumnGap}`,
-    gridRowGap && `row-gap-${gridRowGap}`,
+    gridColumnGap && `gap-x-${gridColumnGap}`,
+    gridRowGap && `gap-y-${gridRowGap}`,
     gridGap && `gap-${gridGap}`,
     justifyContent && `justify-${justifyContent}`,
     alignItems && `items-${alignItems}`,
@@ -96,9 +92,10 @@ export const Grid = ({
     height && `h-${height}`,
     maxWidth && `max-w-${maxWidth}`,
     maxHeight && `max-h-${maxHeight}`,
-  ];
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-  return (
-    <div className={gridClasses.filter(Boolean).join(" ")}>{children}</div>
-  );
+  return <div className={gridClasses}>{children}</div>;
 };
