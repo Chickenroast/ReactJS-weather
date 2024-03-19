@@ -10,28 +10,23 @@ import { data } from "@/models/api";
 
 export function SearchBar() {
   const [searchInput, setSearchInput] = useState("");
+  const [cityList, setCityList] = useState<data[] | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
 
   async function handleSubmit() {
-    try {
-      const returnedData = await fetchByCity(searchInput);
-      const result = returnedData.map((city: data) => {
-        return {
-          name: city.name,
-          country: city.country,
-          lat: city.lat,
-          lon: city.lon,
-          state: city.state,
-        };
-      });
-      console.log(returnedData);
-    } catch (error) {
-      console.error(error);
-    }
-    handleSubmit();
+    const cityData = await fetchByCity(searchInput);
+    // const cityList = cityData.map((city: data) => ({
+    //   name: city.name,
+    //   country: city.country,
+    //   state: city.state,
+    //   lat: city.lat,
+    //   lon: city.lon,
+    // }));
+    setCityList(cityData);
+    console.log(cityList);
   }
 
   return (
@@ -49,13 +44,15 @@ export function SearchBar() {
       >
         Search
       </button>
-      <div>
-        <h1>City Name</h1>
-        <h1>Country</h1>
-        <h1>Latitude</h1>
-        <h1>Longitude</h1>
-        <h1>State</h1>
-      </div>
+      {cityList?.map((city, index) => (
+        <div key={index}>
+          <h1>City : {city.name}</h1>
+          <h1>Country : {city.country}</h1>
+          <h1>State : {city.state}</h1>
+          <h1>Latitude : {city.lat}</h1>
+          <h1>Longitude : {city.lon}</h1>
+        </div>
+      ))}
     </main>
   );
 }
