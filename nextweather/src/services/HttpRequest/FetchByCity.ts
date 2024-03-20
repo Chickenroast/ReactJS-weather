@@ -8,7 +8,7 @@ export async function fetchByCity(name: string | null) {
   const { lat, lon } = cityData;
 
   const WeatherData = await fetch(
-    `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
+    `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
   );
   const weatherData = await WeatherData.json();
   return weatherData;

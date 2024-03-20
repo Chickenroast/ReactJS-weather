@@ -51,3 +51,20 @@ export type CityDataSchema = {
     sunset: number;
   };
 };
+
+export interface CityDataCard {
+  city: {
+    name: string;
+    country: string;
+  };
+  list: Array<{
+    main: {
+      temp: number;
+    };
+    weather: Array<{
+      main: string;
+      description: string;
+      icon: string;
+    }>;
+  }>;
+}
