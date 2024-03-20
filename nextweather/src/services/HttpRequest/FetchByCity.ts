@@ -4,5 +4,15 @@ export async function fetchByCity(name: string | null) {
     `http://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=5&appid=${apiKey}`
   );
   const data = await response.json();
-  return data;
+  const cityData = data[0];
+  const { lat, lon } = cityData;
+
+  const WeatherData = await fetch(
+    `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
+  );
+  const weatherData = await WeatherData.json();
+
+  console.log(weatherData);
+
+  return weatherData;
 }
