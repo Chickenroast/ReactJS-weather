@@ -11,8 +11,5 @@ export async function fetchByCity(name: string | null) {
     `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
   );
   const weatherData = await WeatherData.json();
-
-  console.log(weatherData);
-
   return weatherData;
 }
