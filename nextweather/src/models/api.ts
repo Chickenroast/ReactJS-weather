@@ -53,6 +53,7 @@ export type CityDataSchema = {
 };
 
 export interface CityDataCard {
+  cnt: number;
   city: {
     name: string;
     country: string;
@@ -66,5 +67,6 @@ export interface CityDataCard {
       description: string;
       icon: string;
     }>;
+    dt_txt: string;
   }>;
 }

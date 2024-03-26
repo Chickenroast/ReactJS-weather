@@ -1,7 +1,7 @@
 import { SearchBar } from "../SearchBar/SearchBar";
 import { Flex } from "../Flex/Flex";
 
-export default function Navbar({
+export function Navbar({
   onSearch,
 }: {
   onSearch: (searchInput: string) => void;

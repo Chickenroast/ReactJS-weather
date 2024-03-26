@@ -1,22 +1,19 @@
 "use client";
 import { useState } from "react";
-import Card from "@/components/Card/Card";
+import { Card } from "@/components/Card/Card";
 
 import { fetchByCity } from "@/services/HttpRequest/FetchByCity";
 import { CityDataSchema } from "@/models/api";
-import Navbar from "@/components/Navbar/Navbar";
+import { Navbar } from "@/components/Navbar/Navbar";
 import BackgroundVideo from "@/components/BackGroundVideo/BackgroundVideo";
 import { Flex } from "@/components/Flex/Flex";
 
 export default function Home() {
   const [cityData, setCityData] = useState<CityDataSchema | null>(null);
-  const [weatherData, setweatherData] = useState<CityDataSchema | null>(null);
 
   const handleSearch = async (searchInput: string) => {
     const cityData = await fetchByCity(searchInput);
-    const weatherData = await cityData;
     setCityData(cityData);
-    setweatherData(weatherData);
   };
 
   return (
